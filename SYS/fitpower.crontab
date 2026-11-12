@@ -1,0 +1,7 @@
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# m  h  dom mon dow  comando
+# Sábado 23:00 - respaldo (base de datos + programa) y subida a Backblaze
+0 23 * * 6 /srv/backups/respaldo.sh --subir >> /var/log/fitpower-cron.log 2>&1
+# Domingo 23:00 - elimina el respaldo anterior (conserva el más reciente)
+0 23 * * 0 /srv/backups/limpiar-respaldos.sh >> /var/log/fitpower-cron.log 2>&1
